@@ -72,6 +72,35 @@
         footer { padding: 80px 0; background-color: var(--dark-bg); color: #e0e0e0; text-align: center; border-top: 1px solid #1a2238; }
         .footer-links { margin-top: 20px; }
         .footer-links a { margin: 0 15px; color: var(--text-light); font-weight: 600; }
+
+
+        /* Styles for embedded video responsiveness */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+
+        .video-wrapper {
+            max-width: 800px; /* Adjust as needed */
+            margin: 0 auto 60px auto;
+        }
     </style>
 </head>
 
@@ -135,8 +164,20 @@
             <section style="padding-top: 150px;">
                 <div class="container">
                     <h1 class="section-title">From the Channel</h1>
-                    <p class="section-intro">Visual stories from the front lines of marine exploration and conservation. Our complete collection from the <a href="https://youtube.com/@oceanvoicetv" target="_blank" rel="noopener">@oceanvoicetv</a> channel.</p>
-                    <div id="video-gallery-container" class="content-grid"><p style="text-align:center; grid-column: 1/-1;">Loading videos...</p></div>
+                    <p class="section-intro">Dive into our visual stories from the front lines of marine exploration and conservation. Click below to watch more amazing videos!</p>
+
+
+                    <div class="video-wrapper">
+                        <h2 style="text-align: center; margin-bottom: 25px;">Thirteen Moons: Official Trailer</h2>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/sP-EytLDSfw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+
+                    <div style="text-align: center; margin-top: 40px;">
+                        <a href="https://www.youtube.com/channel/UCndKRxr2SIbJ9iGdO16F6lg" target="_blank" rel="noopener" class="btn">Watch More Videos on YouTube</a>
+                    </div>
                 </div>
             </section>
         </div>
@@ -144,7 +185,7 @@
 
         <!-- BLOG POSTS (HIDDEN BY DEFAULT) -->
         <div id="post-coral-architects" class="page"><article class="post"><header class="post-header"><h1 class="post-title">The Silent Architects: How Coral Reefs Build Worlds</h1><p class="post-meta">By Otilio J. Nuñez</p></header><div class="post-content container"><p>Content for the coral article will be written here. It will discuss coral biology, its importance to the ecosystem, and link to conservation efforts on <a href="https://oceanguardian.life" target="_blank" rel="noopener">Ocean Guardian.life</a>.</p><img src="buceophotos/yellowbox-fish-buceo-koh-samui.webp" alt="Yellow boxfish in a coral reef"></div></article></div>
-        <div id="post-thirteen-moons" class="page"><article class="post"><header class="post-header"><h1 class="post-title">Thirteen Moons: A Look Behind the Scenes</h1><p class="post-meta">By Otilio J. Nuñez</p></header><div class="post-content container"><p>This article will provide an exclusive look into the making of the 'Thirteen Moons' documentary. The series is set to be filmed on location in the Gulf of Thailand, operating out of our PADI 5-Star partner facility. To see where the adventure will begin and support the mission, you can <a href="https://buceokohsamui.com/" target="_blank" rel="noopener">book your own dive trip in Koh Samui</a> and experience these world-class sites firsthand.</p></div></article></div>
+        <div id="post-thirteen-moons" class="page"><article class="post"><header class="post-header"><h1 class="post-title">Thirteen Moons: A Look Behind the Scenes</h1><p class="post-meta">By Otilio J. Nuñez</p></header><div class="post-content container"><p>This article will provide an exclusive look into the planning and pre-production of the 'Thirteen Moons' documentary. The series is set to be filmed on location in the Gulf of Thailand, operating out of our PADI 5-Star partner facility. To see where the adventure will begin and support the mission, you can <a href="https://buceokohsamui.com/" target="_blank" rel="noopener">book your own dive trip in Koh Samui</a> and experience these world-class sites firsthand.</p></div></article></div>
         <div id="post-ethical-encounters" class="page"><article class="post"><header class="post-header"><h1 class="post-title">A Diver's Guide to Ethical Marine Encounters</h1><p class="post-meta">By Otilio J. Nuñez</p></header><div class="post-content container"><p>A practical guide for divers on how to interact with marine life responsibly. Knowledge is the first step, but putting it into practice with seasoned professionals is key. We highly recommend undertaking your training and fun dives with a reputable PADI 5-Star center. For those diving in Thailand, our operational hub, <a href="https://buceokohsamui.com/" target="_blank" rel="noopener">Buceo Koh Samui</a>, provides the highest standards of safety and eco-conscious dive training.</p></div></article></div>
         <div id="post-maldives-expedition" class="page"><article class="post"><header class="post-header"><h1 class="post-title">Expedition Log: Face to Face with Giants in the Maldives</h1><p class="post-meta">By Otilio J. Nuñez</p></header><div class="post-content container"><p>A trip report from the Fuvahmulah Atoll, detailing the logistics and thrill of diving with tiger sharks. This will be a powerful tool for promoting future trips on <a href="https://maldivesholidayescapes.com" target="_blank" rel="noopener">Maldives Holiday Escapes.com</a>.</p><img src="buceophotos/maldivas-tiburon-tigre-scuba-expeditions.webp" alt="Diver with a tiger shark in the Maldives"></div></article></div>
     </main>
@@ -164,10 +205,8 @@
 
 
     <script>
-        // --- PRODUCTION CREDENTIALS ---
-        const YOUTUBE_API_KEY = 'AIzaSyA115ugJ_aEWcTtVMQXrJriYGQKcBFiVXY';
-        const CHANNEL_ID = 'UCndKRxr2SIbJ9iGdO16F6lg';
-        // -----------------------------
+        // No API key or channel ID needed for this static video page.
+        // All dynamic API fetching has been removed as per command.
 
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -195,77 +234,18 @@
 
             const initialPage = location.hash.substring(1);
             showPage(initialPage || 'home');
-             if (initialPage === 'videos') fetchVideos();
-
-
+             
 
 
             window.addEventListener('hashchange', () => {
                 const pageId = location.hash.substring(1);
                 showPage(pageId);
-                if (pageId === 'videos') fetchVideos();
             });
 
 
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
             }, { passive: true });
-
-
-            let videosFetched = false;
-            async function fetchVideos() {
-                if (videosFetched) return;
-                const galleryContainer = document.getElementById('video-gallery-container');
-
-
-                if (!galleryContainer) return;
-                
-                const API_URL = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=50`;
-
-
-                try {
-                    const response = await fetch(API_URL);
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        console.error('YouTube API Error Response:', errorData);
-                        const reason = errorData.error?.errors?.[0]?.reason || 'Unknown Reason';
-                        const message = errorData.error?.message || response.statusText;
-                        throw new Error(`Google API Error: ${message} (Reason: ${reason})`);
-                    }
-                    const data = await response.json();
-                    displayVideos(data.items);
-                    videosFetched = true;
-                } catch (error) {
-                    console.error('Error fetching videos:', error);
-                    galleryContainer.innerHTML = `<div style="text-align:left; color: #ff4d4d; grid-column: 1/-1; font-size: 1.1rem; padding: 20px; border: 1px solid #ff4d4d; border-radius: 8px; background-color: rgba(255, 77, 77, 0.1);"><strong style="display:block; margin-bottom:10px; font-size:1.4rem;">SYSTEM ALERT: Connection to Google Servers Failed</strong><p><strong>REASON REPORTED BY GOOGLE:</strong><br>${error.message}</p><p style="margin-top:15px; font-size:0.9rem; color: #fff;"><strong>Action Required:</strong> This error originates from your Google Cloud project settings. Since the API key is confirmed to work on another domain, the most likely cause is the 'HTTP referrer' restriction on your API key is missing or incorrect for 'oceanvoice.life'. Please verify this setting in the Google Cloud Console.</p></div>`;
-                }
-            }
-
-
-            function displayVideos(videos) {
-                const galleryContainer = document.getElementById('video-gallery-container');
-                galleryContainer.innerHTML = '';
-
-
-                if (!videos || videos.length === 0) {
-                    galleryContainer.innerHTML = '<p style="grid-column: 1/-1;">No videos found for this channel.</p>';
-                    return;
-                }
-
-
-                videos.filter(video => video.id.videoId).forEach(video => {
-                    const card = document.createElement('article');
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank" rel="noopener">
-                            <img src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.title}" loading="lazy">
-                            <div class="card-content">
-                                <h3>${video.snippet.title}</h3>
-                            </div>
-                        </a>`;
-                    galleryContainer.appendChild(card);
-                });
-            }
         });
     </script>
 </body>
