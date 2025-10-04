@@ -531,9 +531,10 @@
 
 
     <script>
-        // NOTE: Replace 'YOUR_YOUTUBE_API_KEY' and 'YOUR_YOUTUBE_CHANNEL_ID' with your actual credentials.
-        const YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY';
-        const CHANNEL_ID = 'UC-l8y4u-2-j_0-2o...'; // Example Channel ID
+        // --- PRODUCTION CREDENTIALS ---
+        const YOUTUBE_API_KEY = 'AIzaSyA115ugJ_aEWcTtVMQXrJriYGQKcBFiVXY';
+        const CHANNEL_ID = 'UCndKRxr2SIbJ9iGdO16F6lg';
+        // -----------------------------
 
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -546,7 +547,6 @@
                 const targetId = pageId && document.getElementById(pageId) ? pageId : 'home';
                 pages.forEach(page => page.classList.toggle('active', page.id === targetId));
                 window.scrollTo(0, 0);
-                // Update hash without adding to history stack for cleaner navigation
                 history.replaceState(null, null, '#' + targetId);
 
 
@@ -565,27 +565,19 @@
             });
 
 
-            // Handle initial page load based on hash
             const initialPage = location.hash.substring(1);
             showPage(initialPage || 'home');
 
 
-
-
-            // Handle browser back/forward navigation
             window.addEventListener('popstate', () => {
                 const pageId = location.hash.substring(1);
                 showPage(pageId || 'home');
             });
 
 
-
-
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
             }, { passive: true });
-
-
 
 
             let videosFetched = false;
@@ -596,24 +588,22 @@
 
                 if (!galleryContainer) return;
                 
-                if (YOUTUBE_API_KEY === 'YOUR_YOUTUBE_API_KEY' || CHANNEL_ID === 'YOUR_YOUTUBE_CHANNEL_ID') {
-                     galleryContainer.innerHTML = `<p style="text-align:center; color: #ff4d4d; grid-column: 1/-1;">Please configure YouTube API Key and Channel ID in the script.</p>`;
-                    return;
-                }
-
-
                 const API_URL = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=50`;
 
 
                 try {
                     const response = await fetch(API_URL);
-                    if (!response.ok) throw new Error(`YouTube API Error: ${response.statusText}`);
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('YouTube API Error Response:', errorData);
+                        throw new Error(`YouTube API Error: ${response.statusText}`);
+                    }
                     const data = await response.json();
                     displayVideos(data.items);
                     videosFetched = true;
                 } catch (error) {
                     console.error('Error fetching videos:', error);
-                    galleryContainer.innerHTML = `<p style="text-align:center; color: #ff4d4d; grid-column: 1/-1;">Failed to load videos. Check console for details.</p>`;
+                    galleryContainer.innerHTML = `<p style="text-align:center; color: #ff4d4d; grid-column: 1/-1;">Failed to load videos. This may be due to an incorrect or restricted API key. Check the browser console for details.</p>`;
                 }
             }
 
@@ -624,7 +614,7 @@
 
 
                 if (!videos || videos.length === 0) {
-                    galleryContainer.innerHTML = '<p style="grid-column: 1/-1;">No videos found.</p>';
+                    galleryContainer.innerHTML = '<p style="grid-column: 1/-1;">No videos found for this channel.</p>';
                     return;
                 }
 
